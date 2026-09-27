@@ -7,74 +7,86 @@ tags: [tech, product]
 
 # PHEV-first
 
-**Claim:** Where cars sit for hours, many slow chargers should produce more electric miles per dollar than a few fast posts, and a moderate-battery PHEV is the vehicle that can use that pattern for ordinary days and the occasional long trip.
+**Claim:** At long-dwell parking, many slow chargers should produce more electric miles per dollar than a few fast posts, and a moderate-battery PHEV is the vehicle that can use that pattern for ordinary days and the occasional long trip.
 
 **Status:** ready · lab card · unfinished experiment
 
+**Terms (once):** **PHEV** = plug-in hybrid electric vehicle (grid charge plus liquid-fuel range). **BEV** = battery-electric only. **L1 / L2 / DCFC** = Level-1 AC (about 1–1.4 kW), Level-2 AC (commonly 6–11 kW; specs run about 7–19 kW), DC fast charge (about 50–350 kW). **Long-dwell** = parking where the car sits for hours (work, overnight, apartment lot, street, driveway). **UF** = utility factor (share of miles expected on electricity given a charge pattern). **NHTS** = National Household Travel Survey. **Stall coverage** = chargers relative to parking spaces, so parked cars can plug without hunting scarce posts. **PEF** = petroleum equivalency factor (CAFE credit math for dual-fueled vehicles) — incentive detail lives off this card.
+
+Working figures and unknowns (labeled):
+
+- **Ordinary-day band:** about **40 electric miles** as a working figure from U.S. travel means — not a claim that it covers a whole year. 2022 NextGen NHTS means: household vehicle-miles about **39.7** per day (margin of error 2.6), driver about **21.8**; 2017 household about **48.8**, driver about **25.8**; AAA 2022 about **30.1** miles per driver-day; FHWA passenger-car annual about **10,881** miles → about **29.8** miles per calendar day. SAE J2841 utility-factor tables rest on **2001** NHTS; 2017 is the last solid distribution vintage. **Unknown:** a published 2022 vehicle-day distribution under 30 / 40 / 50 miles. Average trip length (about **11.5** miles; work trips about **13.4**) is not the same as a day. An older GM line that “40 covers 78% of commuters” meant **one-way commute**, not daily driving. Early Chevy Volt fleets (INL, 2011–12, n=923) showed mean about **40.7** miles between charges, median **31.6**, and 81% at or under 40 — early adopters, not today’s fleet. Travel is right-skewed: in 2017, trips of 50 miles or more were about **2.5%** of trips but about **43%** of person-miles.
+- **Pack / wall energy for about 40 miles:** assume about **300 Wh/mi** mid-range (about 240–400 band) → about **12 kWh** usable pack / about **13–14 kWh** from the wall.
+- **Refill hours for that band:** L1 at 1.4 kW ≈ **9–10 hours**; L2 at 3.3–3.8 kW ≈ **3.5–4.5 hours**; at 6.6–7.2 kW ≈ **1.8–2.2 hours**; at 11.5 kW ≈ **1.2 hours**. DOE federal workplace guidance: L1 ≈ **5 miles of range per hour** (so about 40 in an 8-hour workday); L2 ≈ **25 miles per hour**. NREL session data (about 150,000 sessions) averaged about **15 kWh** delivered.
+- **Installed cost bands (published / practitioner ranges):** L1 about **$200–600**; commercial L2 about **$3,000–15,000** (workplace often **$5,000–8,000**; garage / multifamily often **$7,000–12,000**); DCFC 50–150 kW about **$70,000–150,000+**; 150–350 kW about **$100,000–250,000+**. DCFC is often about **10–30×** an L2 port. Managed sharing of about **2–4 vehicles per port** is common. Demand charges are a large share of DCFC operating cost (directional, not a fixed formula here).
+- **What “enough” stalls means:** there is **no clean published scientific share** of parking spaces that counts as enough. Building-code floors (for example CALGreen-style: roughly 40% L2-ready / 10% with L2 equipment — versions move), practitioner ratios (about 1 L2 per 3–4 plug-in vehicles, or 1 per 8–12 employees), and DOE federal workplace guidance (L1 ≈ 1 per employee; L2 ≈ 1–2) are practice, not a measured optimum. A national stock ratio from NREL (about 40 L2 plugs per 1,000 plug-in vehicles) describes the fleet stock, not how to design one lot. Enough is not one charger per stall.
+- **Credits / PEF:** do **not** lock this card’s working math to vacated tax tables. Federal new-vehicle credits under 30D / 25E are dead for vehicles acquired after **30 Sep 2025**. The separate charger credit under 30C has its own cutoff (around mid-2026 placed-in-service — confirm the statute before relying on it). The 2024 PEF phase-down was vacated in court; the older 2000 PEF figure (**82,049**) sprang back; DOE is rewriting rules (2026). Incentive and PEF detail stays off this lab card.
+
 ## 1. The problem
 
-Most cars travel short distances on ordinary days and sit parked for hours — at work, overnight, anywhere they wait. They still need long range sometimes.
+Most cars travel relatively short distances on ordinary days and sit parked for hours — at work, overnight, apartment lots, street, or driveway. They still need long range sometimes. Right-skew travel makes the year different from the ordinary day: a thin tail of long trips carries a large share of person-miles.
 
-Charging money often goes into a few high-power stalls. Speed helps when you are passing through. Most of the time the car is sitting. Those lots need enough ordinary chargers that plugging in is ordinary, not a hunt for scarce premium posts. Work, apartment, street, driveway: same rule. Many slow chargers, not a few fast ones.
+Charging money often buys a few high-power stalls. Speed helps when the car is passing through. Most of the week the car is sitting. Those long-dwell sites need enough ordinary outlets that plugging in is ordinary, not a hunt for scarce premium posts. Work, apartment, street, driveway: same rule. An apartment lot is the office-lot problem with a different landlord. This is not a story about people who cannot charge at all.
 
 ## 2. The insight
 
-When cars are parked for hours, access matters more than charging speed. An eight-hour sit is a slow-charge problem, not a fast-charge problem. That insight may be useful even apart from the rest of this idea.
+When cars are parked for hours, access matters more than charging speed. A six-to-fourteen-hour sit is an L1 / L2 finish problem for a moderate daily band, not a DC-fast problem. That lot rule may be useful even apart from the PHEV package: for battery-electric cars it is mostly about dwell coverage; for plug-in hybrids it is also about whether the cord gets used.
 
-## 3. How it works
+Engines are efficient at steady highway speed and wasteful in stop-and-go. Right-size the battery for the stop-and-go day (streets, errands, the crawl), not to cover a freeway commute on electricity. The engine can take the highway. The scarce-battery question underneath: what pack size buys the most electrically driven *inefficient* miles per unit of battery material?
 
-### Vehicle and charging
+## 3. The proposal
 
-- **Vehicle:** a moderate battery for common daily travel — starting band about 35–50 electric miles (~40 as a working figure from US travel patterns, not a settled answer). Raise the band as batteries get cheaper. Limited battery material should electrify more cars, not oversized packs on fewer. The question underneath: what battery size buys the most electrically driven miles per scarce battery material?
-- **Electric-first behavior:** the car should not burn gasoline while usable battery charge remains. An unplugged plug-in is a heavy gas car wearing extra mass.
-- **Home charging** overnight when there is a plug.
-- **Long-sit charging (work, overnight lots, street):** ordinary wall-style chargers across enough stalls that plugging in is ordinary, not a hunt for a few posts. Coverage, not reserved premium spaces. An apartment lot is the same problem as the office lot: many slow chargers, not a few fast ones.
+### Vehicle
+
+- **Pack:** a moderate battery for ordinary local and stop-and-go travel — starting band about **35–50 electric miles** (about **40** as the working figure above, not a settled answer; raise as packs get cheaper). Do not size the pack as a freeway-commute battery.
+- **Electric-first behavior:** the car must not burn gasoline while usable charge remains. An unplugged plug-in is a heavy gas car wearing extra mass.
+- **Utility factor as the vehicle metric:** SAE J2841 assumes a full charge each day. Real-world utility factor often falls short of the label (ICCT 2022: about **26–56%** below label; contested by SAE 2024-01-2155; European private cars about half of type-approval, company cars worse). Habitual non-chargers dominate the gap. **Whether people actually plug in is the kill switch** for the PHEV-shaped version of this idea.
+
+### Parking lots
+
+At long-dwell sites, treat charging as stall coverage and power-per-stall matched to how long cars sit — not as a small set of premium posts:
+
+1. **Power per stall** — L1 (about 1.0–1.4 kW) or shared L2 (commonly 6–11 kW) sized so the ordinary-day band finishes inside the sit (workday or overnight). At 6–14 hours of dwell, L1 / L2 finishes the about-40-mile band; DC fast buys unused speed plus a demand spike.
+2. **Stall coverage** — enough outlets that plugging is ordinary. Exact “enough” share of spaces is **unknown**; use pilots and practitioner bands, not a fake density claim. Managed sharing of about 2–4 vehicles per port is standard where ports are shared.
+3. **Site demand** — prefer many slow ports over few fast ports so peak building load stays lower for the same electric-mile delivery at long dwell. Cost bands above: DC fast is often about 10–30× an L2 port.
+4. **Home overnight** — when a plug exists at home, it is still the first refill. The lot thesis does not replace home charging; it covers the long sits away from home, and apartments that are office lots by another name.
+
+Must not change when the lot pattern is chosen: the claim that electric miles per infrastructure dollar rise with coverage at long dwell. If the site installs a handful of DC-fast posts and calls coverage done, the proposal has been abandoned.
 
 ### Resilience
 
 Keep liquid-fuel capability for long trips, emergencies, and gaps in charging. Road trips still work. Nobody waits on a perfect all-electric future to keep moving.
 
-### Optional US layer (not the core)
+### Optional U.S. fuel-capability layer
 
-Flex-fuel (E85) on these cars even when it has little value today. The vehicle stays in the fleet for a decade or more; you cannot retrofit a weekend if foreign oil gets tight. Preparing the fleet is the lead time. Pumps and stockpiles are a separate job. Advanced biofuels or other domestic liquids may belong in the same bucket; corn is not the thesis. A car that can burn a fuel does not help if pumps and stockpiles are not there.
+Flex-fuel (E85) or other domestically producible liquids on these cars — even when the market value is low today — is an optional resilience add-on, not the center of the claim. The vehicle stays in the fleet a decade or more; you cannot retrofit a weekend if foreign oil gets tight. Pumps and stockpiles are a separate job. Corn is not the thesis. Capability is not the same as supply. Tradeoffs (land, water, food vs fuel, lifecycle, seasonal blend, availability in a disruption) stay open. Other countries may use different liquid backups.
 
-Open tradeoffs: land and water use, food vs fuel, lifecycle emissions, seasonal blending, and how much fuel is actually available in a disruption. Other countries may use different liquid backups.
+### Money and credits
 
-## 4. Why this, and what you get
+Incentive design, PEF / CAFE ladders, and credit windows live off this lab card’s working math. Vehicle credits 30D / 25E are dead after 30 Sep 2025 acquisitions; PEF tables are in flux after the 2024 phase-down was vacated. Do not treat a logarithmic pack credit or a vacated PEF ladder as settled inputs here.
 
-Some drivers are excellent battery-only candidates. Others often travel long distances, or park in lots where a handful of fast posts will not cover the stalls. A transition can use different battery sizes and drivetrains for different use cases.
+## 4. Why this
 
-**What you get if it works**
+Some drivers are excellent battery-electric candidates. Others travel long distances often, or park where a handful of fast posts will not cover the stalls. A transition can use different pack sizes and drivetrains for different use cases.
 
-- Ordinary days run on electricity without forcing every driver into a battery-only car.
-- Scarce batteries electrify more vehicles.
-- Lots serve more stalls, for less, than a few high-power posts, with less peak load on the building.
-- Long trips and outages still work.
-- A flex-capable fleet is ready later if a domestic liquid is needed.
-
-**Critical hypothesis (testable):** Abundant slow charging can produce more electric miles per infrastructure dollar than concentrating investment in a small number of high-power chargers at sites where cars already sit for hours.
-
-**Make-or-break:** This only works if people actually plug in. Judge it by plug-in frequency, electric-mile share, battery use, and gasoline burned — not only by hardware on the lot.
+The package is three pieces, not one slogan: (1) many slow chargers at long dwell, (2) a moderate pack for stop-and-go ordinary days, and (3) liquid range for the thin long-trip tail. Make-or-break for the PHEV-shaped version is **plug-in frequency and realized utility factor**, not hardware on the lot alone. The lot pattern can still be right for battery-electric cars even if plug-in hybrids fail to plug in — score them separately.
 
 ## 5. How you'd know
 
-Report at minimum:
-
 **Vehicle**
 
-- % of days plugged in
-- electric miles / total miles
-- gasoline gallons per 100 miles
-- gas burned while usable charge (and a cord) remained
-- battery utilization
+- Share of days plugged in
+- Electric miles / total miles (realized utility factor)
+- Gasoline gallons per 100 miles
+- Gas burned while usable charge (and a cord) remained
+- Battery utilization
 
 **Lots**
 
-- chargers per parking space (stall coverage)
-- sessions per charger
-- average charging power and peak site demand
-- installation cost per parking space served
-- share of parked cars that can charge without competing for a few posts
+- Chargers per parking space (stall coverage)
+- Sessions per charger; share of parked cars that can charge without competing for a few posts
+- Average charging power and peak site demand
+- Installation cost per parking space served (stay inside the published cost bands above; do not invent a dollars-per-stall number)
 
 **System**
 
@@ -82,47 +94,59 @@ Electric miles delivered per dollar of infrastructure and vehicle support — an
 
 Units sold are a weaker number if they do not tell you whether the battery got used.
 
-## 6. First wedge
+## 6. First test
 
-One office lot or city fleet. People who can charge at home still do. Log charging and fuel for 90 days.
+One office lot or city fleet. People who can charge at home still do. Log charging and fuel for **90 days**.
 
 Compare two treatments on similar sites or split lots:
 
 - **A:** few higher-power chargers
-- **B:** many low-power chargers
+- **B:** many low-power chargers (L1 / shared L2 matched to dwell)
 
-Compare electric miles, access, install cost, peak demand, conflicts, utilization.
+Compare electric miles, access, install cost (using the bands above), peak demand, conflicts, utilization, and realized utility factor.
 
-**Win:** high share of ordinary-day miles on electricity; most stalls can plug in; little competition for scarce posts; far fewer fuel stops — and a clear read on which charger pattern buys more electric miles per dollar.
+**Win:** a high share of ordinary-day miles on electricity; most stalls can plug in; little competition for scarce posts; far fewer fuel stops — and a clear read on which charger pattern buys more electric miles per dollar.
 
-Alongside (not blocking): a short check of the national electric-mile working band from the latest US household travel survey.
+**Alongside (not blocking):** keep the national ordinary-day band honest against the latest NHTS means; do not invent a 2022 day-length distribution that was not published.
+
+If treatment B wins on electric miles per dollar at long dwell but PHEV drivers still do not plug in, the **lot rule** can survive as a battery-electric / dwell finding while the **PHEV-shaped package** fails. Score that split explicitly.
 
 ## 7. Open questions
 
-- Exact working electric-mile band from current US travel data — and how fast it should rise?
-- Optional fuel layer: put flex capability on the cars, grow supply (E85 and/or other domestic liquids), both, or defer?
-- Who runs the first logged A/B lot?
-- Power per stall to refill ~40 electric miles in an ordinary sit — and what stall coverage counts as “enough”?
+- Exact working electric-mile band from current U.S. travel data (means versus a still-missing day-length distribution) — and how fast it should rise?
+- What stall coverage counts as “enough” when science has no clean percentage?
+- Power-per-stall schedule to refill about 40 electric miles in ordinary sits across work, overnight, and street parking?
 - What actually raises plug-in rates (habit, software, deposit, fleet rules, a stall you can count on)?
+- Who runs the first logged A/B lot?
+- Optional fuel layer: put flex capability on the cars, grow supply, both, or defer?
+- Off-card: which credit windows remain open, and what PEF rewrite DOE issues in 2026 — verify before any policy memo treats them as live.
 
 ## 8. Why it might not work
 
-- **People don’t plug in** — real-world gas use stays high; the idea dies.
-- **Lots aren’t free power** — panels, landlords, and billing can turn “enough for everyone” into a mega-project.
-- **Coverage gets watered down** — a handful of chargers labeled as done; scarce posts bring back the fight.
-- **Car makers may refuse** — betting on battery-only; dual hardware costs more.
-- **Politics cuts both ways** — “delay tactic” from one side; fuel-blend fights from the other.
-- **Capability ≠ supply** — flex-fuel cars don’t help in a crisis without fuel on hand.
-- **Cold weather / long suburb days** can make a ~40-mile band feel too small.
-- **The pattern may arrive too late** — cheap long-range battery-only cars might show up first.
+- **People don’t plug in** — real utility factor stays far below the label; gas use stays high; the PHEV-shaped version dies even if the lot is wired.
+- **Lots aren’t free power** — panels, landlords, and billing turn “enough for everyone” into a mega-project.
+- **Coverage gets watered down** — a handful of chargers labeled as done; scarce posts bring back the hunt.
+- **DC fast is sold as the long-dwell answer** — unused speed plus demand charges wipe the dollars-per-electric-mile case.
+- **Car makers refuse dual hardware** — betting on battery-electric only; the PHEV premium never shrinks.
+- **The pack gets judged as a freeway battery** — stop-and-go sizing looks “too small” against commute myths (including one-way commute stats misread as daily driving).
+- **Cold weather or long suburb days** make an about-40-mile ordinary-day band feel tight without a higher pack or more reliable plugs.
+- **Politics** — “delay tactic” from one side; fuel-blend fights from the other; capability is not supply for any flex layer.
+- **The pattern arrives too late** — cheap long-range battery-electric cars and dense home charging show up first.
 
-What would make this wrong: unplugged cars, thin coverage, electric miles barely moving, or scarce high-power posts that leave most stalls dead.
+What would make this wrong: unplugged cars, thin coverage, electric miles barely moving, or scarce high-power posts that leave most stalls dark.
 
-## 9. Kin (later)
+## 9. Stress-test
 
-Cross-links when more Atlas cards are live — not first-launch promo:
+**“About 40 covers ordinary life / the year.”** 2022 means support an ordinary-day band near 40; they do not publish a vehicle-day distribution under 30 / 40 / 50, and right-skew long trips carry a large share of person-miles. Utility-factor tables on 2001 NHTS and early-adopter Volt logs are not a modern fleet year-cover proof. Keep “ordinary day”; drop “covers the year” until a day-length distribution exists.
 
-- Food-truck clean power
-- Spare-tire microgrids
-- 4th-gen district H/C
-- Drive-by coverage maps
+**“Many slow always beats few fast.”** Only at long dwell with a band that finishes inside the sit. Pass-through and en-route sites are a different product. If the A/B lot shows DC fast delivering more electric miles per dollar at 6–14 hour dwell inside the cost bands above, the lot half of the claim fails.
+
+**“Enough stalls.”** No clean scientific enough-percentage was found. Building-code floors and practitioner ratios are policy and practice, not a measured optimum. Claiming a percentage here would be invention. Pilots must report coverage and access conflicts, not assert a magic density.
+
+**“PHEV-first rides on the lot.”** The lot rule can be right for battery-electric dwell and still fail for plug-in hybrids if habitual non-charging kills utility factor. Plug-in reality is the kill switch for the vehicle half. Score lot electric-miles per dollar and PHEV realized utility factor as separate pass / fail.
+
+**“Credits / PEF make the math.”** Vehicle credits 30D / 25E are dead for acquisitions after 30 Sep 2025; the 2024 PEF phase-down was vacated; DOE is rewriting. Any card that treats a stale PEF ladder or a dead vehicle credit as a live working figure is wrong on dates. Keep incentive math off this card and mark it in flux.
+
+**“Flex-fuel is required.”** It is an optional U.S. resilience layer. The claim stands or falls on long-dwell many-slow plus moderate-pack ordinary-day electrification. Capability without pumps is theater.
+
+Wrong in one line: the first logged lot still concentrates spend in a few fast posts, most stalls stay dark, and plug-in hybrids burn gas with charge left — or the card invents a travel distribution, stall percentage, or PEF ladder that the sources do not support.
